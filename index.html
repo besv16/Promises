@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+
+  fetch('https://yrgo.github.io/api/movies/the-room.json')
+    .then(response => {
+      // We take the response Promise and return it as JSON.
+      return response.json();
+    })
+    .then(json => {
+      // Now we can now use the JSON as a normal object.
+      console.log(json[4].quote + " - " + json[4].character);
+    });
+
+  function ask (question) {
+    return new Promise((resolve, reject) => {
+      let input = window.prompt(question);
+      console.log(input);
+
+      if (input !== null) {
+        resolve(input);
+      }
+
+      else {
+        reject(new Error(`Cancel`));
+      }
+    });
+
+  }
+
+  ask('What is your first name?')
+  .then(firstName => ask(`Oh hi, ${firstName}! How old are you?`))
+  .then(age => window.alert(`${age}? That's a great age!`))
+  .catch(console.error);
+  </script>
+</body>
+</html>
